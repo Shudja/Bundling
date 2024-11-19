@@ -1,0 +1,184 @@
+{{ block title }}
+<center> Example Page </center>
+{{ endblock }}
+{{ block content }}
+
+</br>
+
+<div class="Image">
+
+</br>
+    <div class="box">
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>89/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>11/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" disabled="true">Choose A</button></center>
+        </div>
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>63/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>37/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" disabled="true">Choose B</button></center>
+        </div>
+
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>45/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" disabled="true">Choose C</button></center>
+        </div>
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>72/100 <span style="color:green" ><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>28/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" disabled="true">Choose D</button></center>
+        </div>
+
+</div>
+
+</br>
+</br>
+
+<p>
+    This example displays four different options. For each option, each urn was created before the start of the experiment according to their creation rules.
+    For the urn in Option A, the computer flipped a computerized coin that had an equal chance of landing on heads or tails. If the coin landed
+    on heads, then the urn in Option A has 89 green balls and 11 purple balls inside of it. If the coin landed on tails, then the urn in Option A has
+    11 green balls and 89 purple balls inside of it. For the urn in Option B, the computer flipped another, separate, computerized coin
+    that had an equal chance of landing on heads or tails. If the coin landed on heads, then the urn in Option B has
+    63 green balls and 37 purple balls inside of it. If the coin landed on tails,
+    then the urn in Option B has 37 green balls and 63 purple balls inside of it. The urn in Option D is also created using a computerized coin. Notice
+    that the urn in Option C has a 100% chance of having 45 green balls, so you know it has 45 green balls and 55 purple balls.
+</p>
+
+<p>
+    After reading each urn's creation rule, you would then make two decisions in this example Situation regarding these four
+    options. You will first choose one of these four options. After making this decision, you will then be shown
+    the color of the ball drawn from the option's urn and you will be paid for it if it is a green ball. This ball will
+    then be placed back in its appropriate urn.  You would then again choose one of the four options.
+</p>
+
+<!--<p>-->
+<!--On the next page, you will face the first Situation.-->
+<!--</p>-->
+
+{{next_button}}
+
+{{ endblock }}
+
+{{ block styles }}
+
+<style>
+  .jar {
+    width: 155px;
+    height: 155px;
+    border: 2px solid black;
+    position: relative;
+    display: flex;
+  }
+
+  .ball {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .green {
+    background-color: green;
+  }
+  .purple {
+    background-color: purple;
+  }
+
+  .Image{
+      display:flex;
+  }
+
+  .box{
+      margin-right:25px;
+      border:3px solid blue;
+      padding:5px;
+  }
+
+  .containerA {
+  width:230px;
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center;
+    border: 2px solid black;
+    margin-right:25px;
+  }
+
+  .containerB{
+    /*display: flex; !* Use flexbox *!*/
+    /*flex-direction: column; !* Stack items vertically *!*/
+    /*justify-content: center; !* Center items horizontally *!*/
+    /*align-items: center; !* Center items vertically *!*/
+      width:125px;
+  }
+
+.title {
+    margin-bottom: 20px; /* Add space below the title */
+  }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+<!--  grid-template-columns: auto auto 222px;-->
+<!--  background-color: #2196F3;-->
+  padding: 10px;
+  border: 3px solid black;
+}
+.grid-item {
+<!--  background-color: rgba(255, 255, 255, 0.8);-->
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+
+</style>
+
+{{ endblock }}

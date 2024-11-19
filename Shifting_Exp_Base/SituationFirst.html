@@ -1,0 +1,182 @@
+{{ block title }}
+<center> Situation {{round_number}} First Decision </center>
+{{ endblock }}
+{{ block content }}
+
+</br>
+
+<div class="Image">
+
+</br>
+    <div class="box">
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center> {{urnA_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnA_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" onclick="Draw(1)">Choose A</button></center>
+        </div>
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>{{urnB_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnB_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" onclick="Draw(2)">Choose B</button></center>
+        </div>
+
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>{{urnC_H}}/100 <span style="color:green" ><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnC_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" onclick="Draw(3)">Choose C</button></center>
+        </div>
+
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{urnD_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+        </br>
+            <center><button type="Button" onclick="Draw(4)">Choose D</button></center>
+        </div>
+
+</div>
+
+</br>
+</br>
+
+<p>
+    This decision is the first decision in Situation {{round_number}}. Please choose an option by clicking
+    on the "Choose" button below the relevant urn. After you make your choice, you will automatically be sent to the
+    next page. On this next page, you will observe the ball that you drew from the option's urn and will be asked to make
+    a second decision between these four options.
+</p>
+
+    <input type="hidden" name="first_choice" id="first_choice"/>
+    <button hidden="true" id="Continue">Continue</button>
+
+
+{{ endblock }}
+
+{{ block styles }}
+
+<style>
+  .jar {
+    width: 155px;
+    height: 155px;
+    border: 2px solid black;
+    position: relative;
+    display: flex;
+  }
+
+  .ball {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .green {
+    background-color: green;
+  }
+  .purple {
+    background-color: purple;
+  }
+
+  .Image{
+      display:flex;
+  }
+
+  .box{
+      margin-right:25px;
+      border:3px solid blue;
+      padding:5px;
+  }
+
+  .containerA {
+  width:260px;
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center;
+    border: 2px solid black;
+    margin-right:25px;
+  }
+
+  .containerB{
+    /*display: flex; !* Use flexbox *!*/
+    /*flex-direction: column; !* Stack items vertically *!*/
+    /*justify-content: center; !* Center items horizontally *!*/
+    /*align-items: center; !* Center items vertically *!*/
+      width:125px;
+  }
+
+.title {
+    margin-bottom: 20px; /* Add space below the title */
+  }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+<!--  grid-template-columns: auto auto 222px;-->
+<!--  background-color: #2196F3;-->
+  padding: 10px;
+  border: 3px solid black;
+}
+.grid-item {
+<!--  background-color: rgba(255, 255, 255, 0.8);-->
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+
+</style>
+
+<script>
+
+
+
+    function Draw(value){
+        document.getElementById("first_choice").value=value
+        document.getElementById("Continue").click()
+    }
+
+</script>
+
+{{ endblock }}

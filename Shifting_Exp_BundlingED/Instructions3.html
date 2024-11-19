@@ -1,0 +1,50 @@
+{{ block title }}
+    Options
+{{ endblock }}
+{{ block content }}
+
+<p>
+    In each Situation, you will make decisions involving four options. Each option contains two urns, which each have
+    {{ C.NUM_BALLS }} balls inside of them (which can either be green or purple). Each urn comes with a description of
+    how it was created (i.e., an Urn Creation Rule). For example, the first urn in the first option might have a 50%
+    chance of having 72 green balls and 28 purple balls and a 50% chance of having 33 green balls and 67 purple balls.
+    The other urns are similar to this urn but have their own creation rules. For example, the second urn in
+    the third option might have a 50% chance of having 50 green balls and 50 purple balls and a 50% chance of having 39
+    green balls and 61 purple balls. The first urn in the fourth option might have a 100% chance of having 80 green
+    balls and 20 purple balls.
+</p>
+
+<p>
+    In each Situation, you will be presented with four options that each have two urns. The urns used in a Situation
+    were created independently from urns in other Situations. That means the creation of an urn is unaffected by
+    the creation of any other urn. If the Urn Creation Rule is the same in two different Situations, the urns themselves
+    are new in the sense that a separate instance of the Urn Creation Rule generated the urn in each Situation.
+    In each of these Situations, you will make two choices between the four options. Whenever you choose an option, you
+    will draw a ball from each of the two urns in the option. Whenever you draw from an
+    urn and the drawn ball is a green ball, you will receive {{ C.BET_PAY }} points.
+    Whenever you draw from an urn and the drawn ball is a purple ball, you will receive 0 points.
+</p>
+
+<p>
+    In each Situation, you will first decide which option to implement. You will then be shown the color of the ball
+    drawn from each urn in the option and you will be paid for any green balls that you draw. These balls will then be placed back into
+    their appropriate urns and you will make a second decision between the four options. You will once again decide
+    which of the four options to choose. You will then be shown the color of the ball drawn from each urn and
+    you will be paid for any green balls that you draw. You can choose the same option for both choices, or different
+    options, it is up to you.
+</p>
+
+<p>
+    As mentioned above, the urns presented to you in a Situation are new urns that are
+    separate from the urns in the other Situations. These urns do not change
+    within a Situation. That is, these urns were created at the start of the experiment according to their Urn Creation
+    Rule and any ball drawn is placed back inside the appropriate urn before the next decision. Once again, we do not
+    observe the composition of any of these urns until the end of the experiment.
+</p>
+
+
+<p>On the next page, we will go through an example Situation.</p>
+
+    {{ next_button }}
+
+{{ endblock }}
