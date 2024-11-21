@@ -82,15 +82,15 @@
 
 <p>
     This decision is the second decision in Situation {{round_number}}. In the first decision, you chose {% if first_choice == 1 %}
-  Option A {% endif %} {% if first_choice == 2 %} Option B {% endif %} {% if first_choice == 3 %} Option C {% endif %} {% if first_choice == 4 %}
-  Option D {% endif %} and drew a {% if green1Drawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
-    {% if green1Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the urn in that option.
+  Urn A {% endif %} {% if first_choice == 2 %} Urn B {% endif %} {% if first_choice == 3 %} Urn C {% endif %} {% if first_choice == 4 %}
+  Urn D {% endif %} and drew a {% if green1Drawn == 1 %} <span style="color:green"><b>green</b></span> ball. {% endif %}
+    {% if green1Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball. {% endif %}
 </p>
 
 <p>
-    Please choose an option by clicking
+    Please choose an urn by clicking
     on the "Choose" button below the relevant urn. After you make your choice, you will automatically be sent to the
-    next page. On this next page, you will observe the ball that you drew from the option's urn.
+    next page. On this next page, you will observe the ball that you drew from the chosen urn.
 </p>
 
     <input type="hidden" name="second_choice" id="second_choice"/>
