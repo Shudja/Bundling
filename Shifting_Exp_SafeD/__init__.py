@@ -59,15 +59,16 @@ class Player(BasePlayer):
 
     bandit_payoff=models.IntegerField()
 
-    Question1Correct1=models.IntegerField()
-    Question1Correct2=models.IntegerField()
+    Question1Correct1=models.IntegerField(initial=-1000)
+    Question1Correct2=models.IntegerField(initial=-1000)
 
-    Question2Correct1=models.IntegerField()
-    Question2Correct2=models.IntegerField()
+    Question2Correct1=models.IntegerField(initial=-1000)
+    Question2Correct2=models.IntegerField(initial=-1000)
 
-    Question3Correct1=models.IntegerField()
-    Question3Correct2=models.IntegerField()
+    Question3Correct1=models.IntegerField(initial=-1000)
+    Question3Correct2=models.IntegerField(initial=-1000)
 
+    Return=models.IntegerField(initial=0)
 
 
 def creating_session(subsession: Subsession):
@@ -193,8 +194,8 @@ class Instructions2(Page):
     form_fields = ['Question1Correct1']
 
 
-    def is_displayed(self):
-        return self.round_number == 1
+    def is_displayed(player):
+        return player.round_number == 1
 
 class Instructions2F(Page):
     form_model = 'player'
@@ -204,12 +205,17 @@ class Instructions2F(Page):
     def is_displayed(player):
         return (player.round_number == 1) & (player.Question1Correct1 == 0)
 
+    def before_next_page(player, timeout_happened):
+        if (player.Question1Correct1==0)& (player.Question1Correct2==0):
+            player.Return=1
+
+
 class Instructions3(Page):
     form_model = 'player'
     form_fields = ['Question2Correct1']
 
-    def is_displayed(self):
-        return self.round_number == 1
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Return==0)
 
 
 class Instructions3F(Page):
@@ -217,23 +223,33 @@ class Instructions3F(Page):
     form_fields = ['Question2Correct2']
 
     def is_displayed(player):
-        return (player.round_number == 1) & (player.Question2Correct1 == 0)
+        return (player.round_number == 1) & (player.Question2Correct1 == 0) & (player.Return==0)
 
-
+    def before_next_page(player, timeout_happened):
+        if (player.Question2Correct1==0)& (player.Question2Correct2==0):
+            player.Return=1
 
 class Instructions4(Page):
     form_model = 'player'
     form_fields = ['Question3Correct1']
 
-    def is_displayed(self):
-        return self.round_number == 1
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Return==0)
 
 class Instructions4F(Page):
     form_model = 'player'
     form_fields = ['Question3Correct2']
 
     def is_displayed(player):
-        return (player.round_number == 1) & (player.Question3Correct1 == 0)
+        return (player.round_number == 1) & (player.Question3Correct1 == 0) & (player.Return==0)
+
+    def before_next_page(player, timeout_happened):
+        if (player.Question3Correct1==0)& (player.Question3Correct2==0):
+            player.Return=1
+
+class PleaseReturn(Page):
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Return==1)
 
 
 class Example(Page):
@@ -423,5 +439,5 @@ class Experiment_Results(Page):
         return self.round_number == 10
 
 page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F, Instructions3, Instructions3F,
-                 Instructions4, Instructions4F, Example, Starting_Situation, SituationFirst,
+                 Instructions4, Instructions4F, PleaseReturn, Example, Starting_Situation, SituationFirst,
                  SituationSecond, SituationResults, Experiment_Results]
