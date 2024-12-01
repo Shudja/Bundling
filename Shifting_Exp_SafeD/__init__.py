@@ -8,7 +8,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'Shifting_Exp_Base'
+    NAME_IN_URL = 'Shifting_Exp_SafeD'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 10
 
@@ -43,11 +43,19 @@ class Player(BasePlayer):
     state3=models.IntegerField()
     state4=models.IntegerField()
 
+    safe1=models.IntegerField()
+    safe2=models.IntegerField()
+    safe3=models.IntegerField()
+    safe4=models.IntegerField()
+
     first_choice=models.IntegerField()
     second_choice=models.IntegerField()
 
-    green1Drawn=models.IntegerField()
-    green2Drawn=models.IntegerField()
+    green1TDrawn=models.IntegerField()
+    green1BDrawn=models.IntegerField()
+
+    green2TDrawn=models.IntegerField()
+    green2BDrawn=models.IntegerField()
 
     bandit_payoff=models.IntegerField()
 
@@ -124,6 +132,7 @@ def creating_session(subsession: Subsession):
                 [60, 60],
             ]
 
+
             #randomizing urns
             seeds=np.array([1,2,3,4,5,6,7,8,9,10])
             np.random.shuffle(seeds)
@@ -195,7 +204,6 @@ class Instructions2F(Page):
     def is_displayed(player):
         return (player.round_number == 1) & (player.Question1Correct1 == 0)
 
-
 class Instructions3(Page):
     form_model = 'player'
     form_fields = ['Question2Correct1']
@@ -210,6 +218,7 @@ class Instructions3F(Page):
 
     def is_displayed(player):
         return (player.round_number == 1) & (player.Question2Correct1 == 0)
+
 
 
 class Instructions4(Page):
@@ -239,6 +248,13 @@ class Starting_Situation(Page):
         )
 
     def before_next_page(player, timeout_happened):
+
+        # safes=[[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51]
+        #        ,[54,53,52,51],[54,53,52,51],[54,53,52,51]]
+
+        safes=[[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54]
+               ,[54,54,54,54],[54,54,54,54],[54,54,54,54]]
+
         player.urnA_H = player.participant.part2_urns[player.round_number-1][0][0]
         player.urnB_H = player.participant.part2_urns[player.round_number-1][1][0]
         player.urnC_H = player.participant.part2_urns[player.round_number-1][2][0]
@@ -249,12 +265,15 @@ class Starting_Situation(Page):
         player.urnC_L = player.participant.part2_urns[player.round_number-1][2][1]
         player.urnD_L = player.participant.part2_urns[player.round_number-1][3][1]
 
-
-
         player.state1=player.participant.part2_states[player.round_number-1][0]
         player.state2=player.participant.part2_states[player.round_number-1][1]
         player.state3=player.participant.part2_states[player.round_number-1][2]
         player.state4=player.participant.part2_states[player.round_number-1][3]
+
+        player.safe1=safes[player.round_number-1][0]
+        player.safe2=safes[player.round_number-1][1]
+        player.safe3=safes[player.round_number-1][2]
+        player.safe4=safes[player.round_number-1][3]
 
 
 class SituationFirst(Page):
@@ -272,6 +291,10 @@ class SituationFirst(Page):
             urnC_L=player.urnC_L,
             urnD_L=player.urnD_L,
             round_number=player.round_number,
+            safe1=player.safe1,
+            safe2=player.safe2,
+            safe3=player.safe3,
+            safe4=player.safe4,
         )
 
 
@@ -285,9 +308,25 @@ class SituationFirst(Page):
         probability=prob*.01
 
         if x<=probability:
-            player.green1Drawn=1
+            player.green1TDrawn=1
         else:
-            player.green1Drawn=0
+            player.green1TDrawn=0
+
+        y=random.random()
+        probabilityS=0
+        if player.first_choice==1:
+            probabilityS=player.safe1*.01
+        elif player.first_choice==2:
+            probabilityS=player.safe2*.01
+        elif player.first_choice==3:
+            probabilityS=player.safe3*.01
+        elif player.first_choice==4:
+            probabilityS=player.safe4*.01
+
+        if y<=probabilityS:
+            player.green1BDrawn=1
+        else:
+            player.green1BDrawn=0
 
 class SituationSecond(Page):
     form_model = 'player'
@@ -304,8 +343,13 @@ class SituationSecond(Page):
             urnC_L=player.urnC_L,
             urnD_L=player.urnD_L,
             round_number=player.round_number,
-            green1Drawn=player.green1Drawn,
+            green1TDrawn=player.green1TDrawn,
             first_choice=player.first_choice,
+            safe1=player.safe1,
+            safe2=player.safe2,
+            safe3=player.safe3,
+            safe4=player.safe4,
+            green1BDrawn=player.green1BDrawn,
         )
 
     def before_next_page(player, timeout_happened):
@@ -318,11 +362,29 @@ class SituationSecond(Page):
         probability=prob*.01
 
         if x<=probability:
-            player.green2Drawn=1
+            player.green2TDrawn=1
         else:
-            player.green2Drawn=0
+            player.green2TDrawn=0
 
-        player.bandit_payoff=0 + player.green1Drawn*100 + player.green2Drawn*100;
+        y=random.random()
+        probabilityS=0
+        if player.second_choice==1:
+            probabilityS=player.safe1*.01
+        elif player.second_choice==2:
+            probabilityS=player.safe2*.01
+        elif player.second_choice==3:
+            probabilityS=player.safe3*.01
+        elif player.second_choice==4:
+            probabilityS=player.safe4*.01
+
+        if y<=probabilityS:
+            player.green2BDrawn=1
+        else:
+            player.green2BDrawn=0
+
+
+
+        player.bandit_payoff=0 + player.green1TDrawn*100 + player.green1BDrawn*100 + player.green2TDrawn*100+ player.green2BDrawn*100;
 
 
 class SituationResults(Page):
@@ -337,11 +399,17 @@ class SituationResults(Page):
             urnC_L=player.urnC_L,
             urnD_L=player.urnD_L,
             round_number=player.round_number,
-            green1Drawn=player.green1Drawn,
+            green1TDrawn=player.green1TDrawn,
+            green1BDrawn=player.green1BDrawn,
             first_choice=player.first_choice,
-            green2Drawn=player.green2Drawn,
+            green2TDrawn=player.green2TDrawn,
+            green2BDrawn=player.green2BDrawn,
             second_choice=player.second_choice,
             bandit_payoff=player.bandit_payoff,
+            safe1=player.safe1,
+            safe2=player.safe2,
+            safe3=player.safe3,
+            safe4=player.safe4,
         )
 
     def before_next_page(player, timeout_happened):
@@ -354,7 +422,6 @@ class Experiment_Results(Page):
     def is_displayed(self):
         return self.round_number == 10
 
-page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F,
-                 Instructions3, Instructions3F,
-                 Instructions4, Instructions4F, Example, Starting_Situation,SituationFirst, SituationSecond,
-                 SituationResults, Experiment_Results]
+page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F, Instructions3, Instructions3F,
+                 Instructions4, Instructions4F, Example, Starting_Situation, SituationFirst,
+                 SituationSecond, SituationResults, Experiment_Results]

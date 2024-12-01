@@ -24,12 +24,12 @@
 
 <!--    {{ next_button }}-->
 
-    <div id="question_box" style="border: dotted 3px black;padding:10px;">
+    <div id="question_box" style="border: dotted 3px red;padding:10px;">
 
 <p>
     <i>Based on the instructions you have just read, please answer the following question.
     Please re-read the instructions above if you are not sure.
-    You will have two opportunities to get this question correct.</i>
+    This is your last and final opportunity to get this question correct.</i>
 </p>
 
 <p><b>How are your final earnings determined for this experiment?</b>
@@ -61,7 +61,7 @@
 
 </div>
 
-    <input type="hidden" name="Question1Correct1" id="Question1Correct1"/>
+    <input type="hidden" name="Question1Correct2" id="Question1Correct2"/>
 
 
 <script>
@@ -86,7 +86,7 @@
                 "You also receive $2.50 for completing the experiment.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question1Correct1').value=0;
+              document.getElementById('Question1Correct2').value=0;
           }
 
           if(document.getElementsByName("colors")[1].checked) {
@@ -96,7 +96,7 @@
                 "You also receive $2.50 for completing the experiment.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question1Correct1').value=1;
+              document.getElementById('Question1Correct2').value=1;
           }
 
           if(document.getElementsByName("colors")[2].checked) {
@@ -106,7 +106,7 @@
                 "You also receive $2.50 for completing the experiment.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question1Correct1').value=0;
+              document.getElementById('Question1Correct2').value=0;
           }
 
         }

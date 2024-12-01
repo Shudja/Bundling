@@ -4,45 +4,108 @@
 {{ block content }}
 
 <p>
-    In each Situation, you will make decisions involving four urns. Each urn has
+    In each Situation, you will make decisions involving urns. Each urn has
     {{ C.NUM_BALLS }} balls inside of them (which can either be green or purple). Each urn comes with a description of
-    how it was created (i.e., an Urn Creation Rule). For example, the first urn might have a 50% chance
+    how it was created (i.e., an Urn Creation Rule). For example, one urn might have a 50% chance
     of having 72 green balls and 28 purple balls and a 50% chance of having 33 green balls and 67 purple balls.
-    The other urns are similar to this urn but have their own creation rules. For example, the third urn might have a
+    The other urns are similar to this urn but have their own creation rules. For example, another urn might have a
     50% chance of having 50 green balls and 50 purple balls and a 50% chance of having 39 green balls and 61 purple
-    balls. The fourth urn might have a 100% chance of having 80 green balls and 20 purple balls.
+    balls. Another urn might have a 100% chance of having 80 green balls and 20 purple balls.
 </p>
 
 <p>
-    In each Situation, you will be presented with four urns. The urns used in a Situation were
-    created independently from urns in other Situations. That means the creation of an urn is unaffected by
+    <b>The urns used in a Situation were
+    created independently from urns in other Situations (and all other urns in the experiment).</b> That means the creation of an urn is unaffected by
     the creation of any other urn. If the Urn Creation Rule is the same in two different Situations, the urns themselves
     are new in the sense that a separate instance of the Urn Creation Rule generated the urn in each Situation.
-    In each of these Situations, you will make two choices between the four urns. Whenever you choose an urn,
-    you will draw a ball from that urn. Whenever you draw from an urn and the drawn ball is a green ball,
-    you will receive {{ C.BET_PAY }} points. Whenever you draw from an urn and the drawn ball is a purple ball, you will
-    receive 0 points.
 </p>
+
+<!--    {{ next_button }}-->
+
+
+    <div id="question_box" style="border: dotted 3px black;padding:10px;">
 
 <p>
-    In each Situation, you will first decide which urn to draw from. You will then be shown the color of the ball drawn
-    from the chosen urn and you will be paid for it if it is a green ball. This ball will then be placed back into
-    the appropriate urn and you will make a second decision between the four urns. You will once again decide which
-    of the four urns to choose. You will then be shown the color of the ball drawn from the chosen urn and you will be paid
-    for it if it is a green ball. You can choose the same urn for both choices, or different urns, it is up to you.
+    <i>Based on the instructions you have just read, please answer the following question.
+    Please re-read the instructions above if you are not sure.
+    You will have two opportunities to get this question correct.</i>
 </p>
 
-<p>
-    As mentioned above, the urns presented to you in a Situation are new urns that are
-    separate from the urns in the other Situations. These urns do not change
-    within a Situation. That is, these urns were created at the start of the experiment according to their Urn Creation
-    Rule and the first ball drawn is placed back inside the urn before the next decision. Once again, we do not
-    observe the composition of any of these urns until the end of the experiment.
+<p><b>Imagine that there is an urn that has a 50% chance
+    of having 72 green balls and 28 purple balls and a 50% chance of having 33 green balls and 67 purple balls. Which
+    of the following statements is correct?</b>
 </p>
 
+    <p>
+        <input type="radio" name="colors" value="1" id="myRadio1" onclick="Assess()"> The experimenter chose the composition
+        that they liked the most. Thus, it is possible that this urn has more or less than a 50% chance of having 72 green balls
+        and 28 purple balls.</input>
+    </p>
+    <p>
+        <input type="radio" name="colors" value="2" id="myRadio2" onclick="Assess()"> The chance that this urn has 72 green balls
+        and 28 purple balls depends on the other urns in the experiment.</input>
+    </p>
 
-<p>On the next page, we will go through an example Situation.</p>
+    <p>
+        <input type="radio" name="colors" value="3" id="myRadio3" onclick="Assess()"> This urn has a 50% chance of having
+        72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.</input>
+    </p>
 
-    {{ next_button }}
+    <button type="Button" id="Submit" onclick="myFunction()">Submit</button>
+
+    <button id="Next">Next</button>
+
+<p id="demo"></p>
+
+</div>
+
+    <input type="hidden" name="Question2Correct1" id="Question2Correct1"/>
+
+
+<script>
+
+        document.getElementById("Next").style.visibility="hidden";
+        document.getElementById("Submit").disabled = true;
+
+        function Assess(){
+            document.getElementById("Submit").disabled = false;
+        }
+
+        function myFunction() {
+
+            document.getElementById("myRadio1").disabled = true;
+            document.getElementById("myRadio2").disabled = true;
+            document.getElementById("myRadio3").disabled = true;
+
+          if(document.getElementsByName("colors")[0].checked) {
+              document.getElementById("demo").innerHTML = "This is incorrect. This urn has a 50% chance of having " +
+        "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question2Correct1').value=0;
+          }
+
+          if(document.getElementsByName("colors")[1].checked) {
+              document.getElementById("demo").innerHTML = "This is incorrect. This urn has a 50% chance of having " +
+        "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question2Correct1').value=0;
+          }
+
+          if(document.getElementsByName("colors")[2].checked) {
+              document.getElementById("demo").innerHTML = "This is correct. This urn has a 50% chance of having " +
+                  "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question2Correct1').value=1;
+          }
+
+        }
+
+        localStorage.clear();
+
+    </script>
+
 
 {{ endblock }}

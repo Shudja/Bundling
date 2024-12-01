@@ -1,21 +1,12 @@
 {{ block title }}
-<center> Experiment Results </center>
+<center> Starting Situation {{round_number}}  </center>
 {{ endblock }}
 {{ block content }}
 
-</br>
-
 
 <p>
-    In this experiment, you received {{participant.payoff_plus_participation_fee}}. Before the start of the experiment,
-    Situation {{player.participant.random_sheet}} was randomly chosen for payment. You received {{player.participant.Payoff1}}
-    Dollars from this Situation. You received {{C.COMPLETION_FEE}} dollars from the completion fee.
+    You are now starting Situation {{round_number}}.
 </p>
-
-
-
-    <input type="hidden" name="second_choice" id="second_choice"/>
-    <button hidden="true" id="Continue">Continue</button>
 
 {{next_button}}
 

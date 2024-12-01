@@ -1,5 +1,5 @@
 {{ block title }}
-<center> Situation {{round_number}} First Decision </center>
+<center> Situation {{round_number}} Results </center>
 {{ endblock }}
 {{ block content }}
 
@@ -35,7 +35,6 @@
 
 
         </br>
-            <center><button type="Button" onclick="Draw(1)" id="b1">Choose A</button></center>
         </div>
 
     <div class="box">
@@ -52,6 +51,8 @@
         <center>{{urnB_L}}/100 <span style="color:green"><b>Green</b></span></center>
         </div>
             </div>
+
+
          </br>
 
                 <div class="containerA" style="margin-left:auto;margin-right:auto">
@@ -65,7 +66,6 @@
 
 
         </br>
-            <center><button type="Button" onclick="Draw(2)" id="b2">Choose B</button></center>
         </div>
 
 
@@ -84,6 +84,7 @@
         </div>
             </div>
 
+
          </br>
 
                 <div class="containerA" style="margin-left:auto;margin-right:auto">
@@ -97,7 +98,6 @@
 
 
         </br>
-            <center><button type="Button" onclick="Draw(3)" id="b3">Choose C</button></center>
         </div>
 
     <div class="box">
@@ -109,6 +109,7 @@
         <center>{{urnD_H}}/100 <span style="color:green"><b>Green</b></span></center>
         </div>
             </div>
+
 
          </br>
 
@@ -122,8 +123,8 @@
             </div>
 
 
+
         </br>
-            <center><button type="Button" onclick="Draw(4)" id="b4">Choose D</button></center>
         </div>
 
 </div>
@@ -131,16 +132,87 @@
 </br>
 </br>
 
+
 <p>
-    This is the first of two decisions in Situation {{round_number}}. Please choose an option by clicking
-    on the "Choose" button below the relevant urns. After you make your choice, you will be sent to the
-    next page. On this next page, you will observe the balls that you drew from the option's urns and will be asked to make
-    a second decision between these four options.
+    In this Situation, you received a payoff of {{bandit_payoff}} points.  Below is a feedback table
+    summarizing your choice and resulting ball(s) drawn in this Situation.
 </p>
 
-    <input type="hidden" name="first_choice" id="first_choice"/>
+
+
+</br>
+<center>
+    <table>
+      <tr>
+        <th>Decision Number</th>
+          <th>Option Chosen</th>
+        <th>Ball Drawn</th>
+      </tr>
+      <tr>
+        <td>First</td>
+        <td>{% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+          <td>{% if green1TDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from top urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+            <td>{% if green1BDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from bottom urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+      </tr>
+             <tr>
+        <td>Second</td>
+        <td>{% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+          <td>{% if green2TDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green2TDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from top urn in {% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+            <td>{% if green2BDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green2BDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from bottom urn in {% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+      </tr>
+    </table>
+</center>
+</br>
+
+<p>
+    In the first decision, you chose {% if first_choice == 1 %}
+  Option A.{% endif %} {% if first_choice == 2 %} Option B.{% endif %} {% if first_choice == 3 %} Option C.{% endif %} {% if first_choice == 4 %}
+  Option D.{% endif %} You drew a {% if green1TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the top urn in that option.
+    You drew a {% if green1BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the bottom urn
+    in that option.
+
+
+    In the second decision, you chose {% if second_choice == 1 %}
+  Option A.{% endif %} {% if second_choice == 2 %} Option B.{% endif %} {% if second_choice == 3 %} Option C.{% endif %} {% if second_choice == 4 %}
+  Option D.{% endif %} You drew a {% if green2TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green2TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the top urn in that option.
+    You drew a {% if green2BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green2BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the bottom urn
+    in that option.
+</p>
+
+
+
+    <input type="hidden" name="second_choice" id="second_choice"/>
     <button hidden="true" id="Continue">Continue</button>
 
+{{next_button}}
 
 {{ endblock }}
 
@@ -216,22 +288,14 @@
   align-items: center;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+td,th {
+  padding:10px;
+}
 
 </style>
 
-<script>
-
-
-
-    function Draw(value){
-        document.getElementById("first_choice").value=value
-        document.getElementById("Continue").hidden=false;
-        document.getElementById("b1").disabled=true;
-        document.getElementById("b2").disabled=true;
-        document.getElementById("b3").disabled=true;
-        document.getElementById("b4").disabled=true;
-    }
-
-</script>
 
 {{ endblock }}

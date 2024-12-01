@@ -1,5 +1,5 @@
 {{ block title }}
-<center> Situation {{round_number}} Reults </center>
+<center> Situation {{round_number}} Results </center>
 {{ endblock }}
 {{ block content }}
 
@@ -133,25 +133,79 @@
 </br>
 
 <p>
-    In this Situation, you received a payoff of {{bandit_payoff}} points.
+    In this Situation, you received a payoff of {{bandit_payoff}} points.  Below is a feedback table
+    summarizing your choice and resulting ball(s) drawn in this Situation.
+</p>
 
+
+
+</br>
+<center>
+    <table>
+      <tr>
+        <th>Decision Number</th>
+          <th>Option Chosen</th>
+        <th>Ball Drawn</th>
+      </tr>
+      <tr>
+        <td>First</td>
+        <td>{% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+          <td>{% if green1TDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from top urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+            <td>{% if green1BDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from bottom urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+      </tr>
+             <tr>
+        <td>Second</td>
+        <td>{% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+          <td>{% if green2TDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green2TDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from top urn in {% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+            <td>{% if green2BDrawn == 1 %} <span style="color:green"><b>Green</b></span>{% endif %}
+    {% if green2BDrawn == 0 %} <span style="color:purple"><b>Purple</b></span>{% endif %} from bottom urn in {% if second_choice == 1 %}
+  Option A{% endif %}{% if second_choice == 2 %} Option B{% endif %}{% if second_choice == 3 %} Option C{% endif %}{% if second_choice == 4 %}
+  Option D{% endif %}</td>
+      </tr>
+    </table>
+</center>
+</br>
+
+<p>
     In the first decision, you chose {% if first_choice == 1 %}
   Option A.{% endif %} {% if first_choice == 2 %} Option B.{% endif %} {% if first_choice == 3 %} Option C.{% endif %} {% if first_choice == 4 %}
   Option D.{% endif %} You drew a {% if green1TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
-    {% if green1TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the first urn (i.e., top urn) in that option.
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the top urn in that option.
     You drew a {% if green1BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
-    {% if green1BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the second urn (i.e., bottom urn)
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the bottom urn
     in that option.
 
 
     In the second decision, you chose {% if second_choice == 1 %}
   Option A.{% endif %} {% if second_choice == 2 %} Option B.{% endif %} {% if second_choice == 3 %} Option C.{% endif %} {% if second_choice == 4 %}
   Option D.{% endif %} You drew a {% if green2TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
-    {% if green2TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the first urn (i.e., top urn) in that option.
+    {% if green2TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the top urn in that option.
     You drew a {% if green2BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
-    {% if green2BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the second urn (i.e., bottom urn)
+    {% if green2BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the bottom urn
     in that option.
 </p>
+
 
 
     <input type="hidden" name="second_choice" id="second_choice"/>
@@ -233,6 +287,12 @@
   align-items: center;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+td,th {
+  padding:10px;
+}
 
 </style>
 

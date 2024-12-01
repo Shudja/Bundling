@@ -20,15 +20,15 @@
     are new in the sense that a separate instance of the Urn Creation Rule generated the urn in each Situation.
 </p>
 
-
 <!--    {{ next_button }}-->
 
-    <div id="question_box" style="border: dotted 3px black;padding:10px;">
+
+    <div id="question_box" style="border: dotted 3px red;padding:10px;">
 
 <p>
     <i>Based on the instructions you have just read, please answer the following question.
     Please re-read the instructions above if you are not sure.
-    You will have two opportunities to get this question correct.</i>
+    This is your last and final opportunity to get this question correct.</i>
 </p>
 
 <p><b>Imagine that there is an urn that has a 50% chance
@@ -59,7 +59,7 @@
 
 </div>
 
-    <input type="hidden" name="Question2Correct1" id="Question2Correct1"/>
+    <input type="hidden" name="Question2Correct2" id="Question2Correct2"/>
 
 
 <script>
@@ -82,7 +82,7 @@
         "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question2Correct1').value=0;
+              document.getElementById('Question2Correct2').value=0;
           }
 
           if(document.getElementsByName("colors")[1].checked) {
@@ -90,7 +90,7 @@
         "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question2Correct1').value=0;
+              document.getElementById('Question2Correct2').value=0;
           }
 
           if(document.getElementsByName("colors")[2].checked) {
@@ -98,7 +98,7 @@
                   "72 green balls and 28 purple balls and the urn composition is based solely on the Urn Creation Rule.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
-              document.getElementById('Question2Correct1').value=1;
+              document.getElementById('Question2Correct2').value=1;
           }
 
         }

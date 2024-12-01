@@ -59,6 +59,17 @@ class Player(BasePlayer):
 
     bandit_payoff=models.IntegerField()
 
+    Question1Correct1=models.IntegerField()
+    Question1Correct2=models.IntegerField()
+
+    Question2Correct1=models.IntegerField()
+    Question2Correct2=models.IntegerField()
+
+    Question3Correct1=models.IntegerField()
+    Question3Correct2=models.IntegerField()
+
+
+
 
 def creating_session(subsession: Subsession):
 
@@ -179,12 +190,52 @@ class Instructions1(Page):
         return self.round_number == 1
 
 class Instructions2(Page):
+    form_model = 'player'
+    form_fields = ['Question1Correct1']
+
+
     def is_displayed(self):
         return self.round_number == 1
 
+class Instructions2F(Page):
+    form_model = 'player'
+    form_fields = ['Question1Correct2']
+
+
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Question1Correct1 == 0)
+
 class Instructions3(Page):
+    form_model = 'player'
+    form_fields = ['Question2Correct1']
+
     def is_displayed(self):
         return self.round_number == 1
+
+
+class Instructions3F(Page):
+    form_model = 'player'
+    form_fields = ['Question2Correct2']
+
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Question2Correct1 == 0)
+
+
+
+class Instructions4(Page):
+    form_model = 'player'
+    form_fields = ['Question3Correct1']
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+class Instructions4F(Page):
+    form_model = 'player'
+    form_fields = ['Question3Correct2']
+
+    def is_displayed(player):
+        return (player.round_number == 1) & (player.Question3Correct1 == 0)
+
 
 class Example(Page):
     def is_displayed(self):
@@ -369,5 +420,6 @@ class Experiment_Results(Page):
     def is_displayed(self):
         return self.round_number == 10
 
-page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions3, Example, Starting_Situation, SituationFirst,
+page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F, Instructions3, Instructions3F,
+                 Instructions4, Instructions4F,  Example, Starting_Situation, SituationFirst,
                  SituationSecond, SituationResults, Experiment_Results]

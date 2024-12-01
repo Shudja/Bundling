@@ -22,7 +22,7 @@
         </div>
             </div>
         </br>
-            <center><button type="Button" onclick="Draw(1)">Choose A</button></center>
+            <center><button type="Button" onclick="Draw(1)" id="b1">Choose A</button></center>
         </div>
 
     <div class="box">
@@ -40,7 +40,7 @@
         </div>
             </div>
         </br>
-            <center><button type="Button" onclick="Draw(2)">Choose B</button></center>
+            <center><button type="Button" onclick="Draw(2)" id="b2">Choose B</button></center>
         </div>
 
 
@@ -59,7 +59,7 @@
         </div>
             </div>
         </br>
-            <center><button type="Button" onclick="Draw(3)">Choose C</button></center>
+            <center><button type="Button" onclick="Draw(3)" id="b3">Choose C</button></center>
         </div>
 
     <div class="box">
@@ -72,7 +72,7 @@
         </div>
             </div>
         </br>
-            <center><button type="Button" onclick="Draw(4)">Choose D</button></center>
+            <center><button type="Button" onclick="Draw(4)" id="b4">Choose D</button></center>
         </div>
 
 </div>
@@ -81,8 +81,8 @@
 </br>
 
 <p>
-    This decision is the first decision in Situation {{round_number}}. Please choose an urn by clicking
-    on the "Choose" button below the relevant urn. After you make your choice, you will automatically be sent to the
+    This is the first of two decisions in Situation {{round_number}}. Please choose an urn by clicking
+    on the "Choose" button below the relevant urn. After you make your choice, you will be sent to the
     next page. On this next page, you will observe the ball that you drew from the chosen urn and will be asked to make
     a second decision between these four urns.
 </p>
@@ -174,7 +174,11 @@
 
     function Draw(value){
         document.getElementById("first_choice").value=value
-        document.getElementById("Continue").click()
+        document.getElementById("Continue").hidden=false;
+        document.getElementById("b1").disabled=true;
+        document.getElementById("b2").disabled=true;
+        document.getElementById("b3").disabled=true;
+        document.getElementById("b4").disabled=true;
     }
 
 </script>

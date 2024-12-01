@@ -18,11 +18,102 @@
 
 <p>
     In this experiment, you will face Situations that involve drawing balls
-    from computerized urns. <b>All of the urns used in this experiment were already created as they were created
-    when you first opened the experiment and we have not seen the
+    from computerized urns. <b>All of the urns used in this experiment were already created when you first opened the experiment and we have not seen the
     composition of any of these urns.</b>
 <p>
 
-    {{ next_button }}
+<!--    {{ next_button }}-->
+
+    <div id="question_box" style="border: dotted 3px black;padding:10px;">
+
+<p>
+    <i>Based on the instructions you have just read, please answer the following question.
+    Please re-read the instructions above if you are not sure.
+    You will have two opportunities to get this question correct.</i>
+</p>
+
+<p><b>How are your final earnings determined for this experiment?</b>
+</p>
+
+    <p>
+        <input type="radio" name="colors" value="1" id="myRadio1" onclick="Assess()"> Points are only hypothetical and
+        do not contribute to the final earnings. I receive $2.50 for completing the experiment. </input>
+    </p>
+    <p>
+        <input type="radio" name="colors" value="2" id="myRadio2" onclick="Assess()"> I receive the
+        earnings from one randomly selected Situation in the experiment,
+                where points are converted into dollars at a rate of 1 point = 0.03 dollars.
+                I also receive $2.50 for completing the experiment. </input>
+    </p>
+
+    <p>
+        <input type="radio" name="colors" value="3" id="myRadio3" onclick="Assess()"> I receive the earnings from all
+        Situations in the experiment,
+                where points are converted into dollars at a rate of 1 point = 0.03 dollars.
+                I also receive $2.50 for completing the experiment. </input>
+    </p>
+
+    <button type="Button" id="Submit" onclick="myFunction()">Submit</button>
+
+    <button id="Next">Next</button>
+
+<p id="demo"></p>
+
+</div>
+
+    <input type="hidden" name="Question1Correct1" id="Question1Correct1"/>
+
+
+<script>
+
+        document.getElementById("Next").style.visibility="hidden";
+        document.getElementById("Submit").disabled = true;
+
+        function Assess(){
+            document.getElementById("Submit").disabled = false;
+        }
+
+        function myFunction() {
+
+            document.getElementById("myRadio1").disabled = true;
+            document.getElementById("myRadio2").disabled = true;
+            document.getElementById("myRadio3").disabled = true;
+
+          if(document.getElementsByName("colors")[0].checked) {
+              document.getElementById("demo").innerHTML = "This is incorrect. You receive the " +
+        "earnings from one randomly selected Situation in the experiment, " +
+                "where points are converted into dollars at a rate of 1 point = 0.03 dollars. " +
+                "You also receive $2.50 for completing the experiment.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question1Correct1').value=0;
+          }
+
+          if(document.getElementsByName("colors")[1].checked) {
+              document.getElementById("demo").innerHTML = "This is correct. You receive the " +
+        "earnings from one randomly selected Situation in the experiment, " +
+                "where points are converted into dollars at a rate of 1 point = 0.03 dollars. " +
+                "You also receive $2.50 for completing the experiment.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question1Correct1').value=1;
+          }
+
+          if(document.getElementsByName("colors")[2].checked) {
+              document.getElementById("demo").innerHTML = "This is incorrect. You receive the " +
+        "earnings from one randomly selected Situation in the experiment, " +
+                "where points are converted into dollars at a rate of 1 point = 0.03 dollars. " +
+                "You also receive $2.50 for completing the experiment.";
+              document.getElementById("Submit").disabled = true;
+              document.getElementById("Next").style.visibility="visible";
+              document.getElementById('Question1Correct1').value=0;
+          }
+
+        }
+
+        localStorage.clear();
+
+    </script>
+
 
 {{ endblock }}

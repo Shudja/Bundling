@@ -1,5 +1,5 @@
 {{ block title }}
-<center> Situation {{round_number}} Reults </center>
+<center> Situation {{round_number}} Results </center>
 {{ endblock }}
 {{ block content }}
 
@@ -78,6 +78,40 @@
 
 <p>
     In this Situation, you received a payoff of {{bandit_payoff}} points.
+ Below is a feedback table
+    summarizing your choice and resulting ball(s) drawn in this Situation.
+</p>
+
+
+</br>
+<center>
+    <table>
+      <tr>
+        <th>Decision Number</th>
+        <th>Urn Chosen</th>
+        <th>Ball Drawn</th>
+      </tr>
+      <tr>
+        <td>First</td>
+        <td>{% if first_choice == 1 %}
+  Urn A {% endif %} {% if first_choice == 2 %} Urn B {% endif %} {% if first_choice == 3 %} Urn C {% endif %} {% if first_choice == 4 %}
+  Urn D {% endif %}</td>
+        <td>{% if green1Drawn == 1 %} <span style="color:green"><b>Green</b></span> {% endif %}
+    {% if green1Drawn == 0 %} <span style="color:purple"><b>Purple</b></span> {% endif %}</td>
+      </tr>
+        <tr>
+        <td>Second</td>
+        <td>{% if second_choice == 1 %}
+  Urn A {% endif %} {% if second_choice == 2 %} Urn B {% endif %} {% if second_choice == 3 %} Urn C {% endif %} {% if second_choice == 4 %}
+  Urn D {% endif %}</td>
+        <td>{% if green2Drawn == 1 %} <span style="color:green"><b>Green</b></span> {% endif %}
+    {% if green2Drawn == 0 %} <span style="color:purple"><b>Purple</b></span> {% endif %}</td>
+      </tr>
+    </table>
+</center>
+</br>
+
+<p>
 
     In the first decision, you chose {% if first_choice == 1 %}
   Urn A {% endif %} {% if first_choice == 2 %} Urn B {% endif %} {% if first_choice == 3 %} Urn C {% endif %} {% if first_choice == 4 %}
@@ -89,7 +123,6 @@
   Urn D {% endif %} and drew a {% if green2Drawn == 1 %} <span style="color:green"><b>green</b></span> ball. {% endif %}
     {% if green2Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball. {% endif %}
 </p>
-
 
     <input type="hidden" name="second_choice" id="second_choice"/>
     <button hidden="true" id="Continue">Continue</button>
@@ -170,6 +203,12 @@
   align-items: center;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+td,th {
+  padding:10px;
+}
 
 </style>
 
