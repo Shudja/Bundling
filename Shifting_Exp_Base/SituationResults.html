@@ -61,11 +61,27 @@
 
     <div class="box">
 
+        {% if urnD_H == urnD_L %}
+            <div class="containerA" style="margin-left:auto;margin-right:auto">
+            <div class="containerB">
+
+            <center><u>100%</u></center>
+            <center>{{urnD_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        {% endif %}
+
+         {% if urnD_H != urnD_L %}
         <div class="containerA" style="margin-left:auto;margin-right:auto">
         <div class="containerB">
 
-        <center><u>100%</u></center>
-        <center>{{urnD_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        <center><u>50%</u></center>
+        <center>{{urnD_H}}/100 <span style="color:green" ><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnD_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        {% endif %}
+
         </div>
             </div>
         </br>

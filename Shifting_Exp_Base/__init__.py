@@ -75,67 +75,72 @@ def creating_session(subsession: Subsession):
 
             urnAs = [
                 [90, 10],  # Adding uncertainty, compare to Base
-                [85, 15],  # Reducing spread, what happens
-                [95, 5],
-                [60, 0],  # First Stage revealing, compare to Base, compare to prediction
-                [55, 5],
-                [90, 30],  # Base
-                [95, 25],  # Compare to adding uncertainty one
-                [85, 35],
-                [80, 0],
-                [100, 20],
+                [90, 30],  # Reducing spread, what happens
+                [70, 10],
+                [100, 40],  # First Stage revealing, compare to Base, compare to prediction
+                [60, 0],
+                [100, 20],  # Base
+                [80, 0],  # Compare to adding uncertainty one
+                [70, 0],
+                [100, 30],
+                [90, 10],
             ]
 
             urnBs = [
                 [80, 20],  # Adding uncertainty, compare to Base
-                [70, 30],  # Reducing spread, what happens
-                [85, 15],
-                [50, 10],  # First Stage revealing, compare to Base, compare to prediction
-                [45, 15],
-                [80, 40],  # Base
-                [85, 35],  # Compare to adding uncertainty one
-                [75, 45],
-                [70, 10],
-                [90, 30],
+                [80, 40],  # Reducing spread, what happens
+                [60, 20],
+                [90, 50],  # First Stage revealing, compare to Base, compare to prediction
+                [50, 10],
+                [90, 30],  # Base
+                [70, 10],  # Compare to adding uncertainty one
+                [60, 10],
+                [90, 40],
+                [80, 20],
             ]
 
             urnCs = [
-                [60, 40],  # Adding uncertainty, compare to Base
-                [75, 25],  # Reducing spread, what happens
-                [65, 35],
-                [40, 20],  # First Stage revealing, compare to Base, compare to prediction
-                [45, 15],
-                [70, 50],  # Base
-                [75, 45],  # Compare to adding uncertainty one
-                [65, 55],
+                [70, 30],  # Adding uncertainty, compare to Base
+                [70, 50],  # Reducing spread, what happens
                 [50, 30],
-                [70, 50],
+                [80, 60],  # First Stage revealing, compare to Base, compare to prediction
+                [40, 20],
+                [80, 40],  # Base
+                [60, 20],  # Compare to adding uncertainty one
+                [50, 20],
+                [80, 50],
+                [70, 30],
             ]
 
             urnDs = [
-                [50, 50],  # Adding uncertainty, compare to Base
-                [50, 50],  # Reducing spread, what happens
-                [50, 50],
-                [30, 30],  # First Stage revealing, compare to Base, compare to prediction
-                [30, 30],
-                [60, 60],  # Base
-                [60, 60],  # Compare to adding uncertainty one
-                [60, 60],
+                [60, 40],  # Adding uncertainty, compare to Base
+                [60, 60],  # Reducing spread, what happens
                 [40, 40],
-                [60, 60],
+                [70, 70],  # First Stage revealing, compare to Base, compare to prediction
+                [30, 30],
+                [70, 30],  # Base
+                [50, 30],  # Compare to adding uncertainty one
+                [40, 30],
+                [70, 60],
+                [60, 40],
             ]
 
             #randomizing urns
-            seeds=np.array([1,2,3,4,5,6,7,8,9,10])
+            seeds=np.array([2,3,4,5,6,7,8,9])
             np.random.shuffle(seeds)
 
+
             part2_urns_randomized=[]
+
+            part2_urns_randomized.append([urnAs[0], urnBs[0], urnCs[0], urnDs[0]])
 
             for i in range(len(seeds)):
                 part2_urns_randomized.append([urnAs[seeds[i]-1], urnBs[seeds[i]-1], urnCs[seeds[i]-1], urnDs[seeds[i]-1]])
 
-            player.participant.part2_urns=part2_urns_randomized
+            part2_urns_randomized.append([urnAs[9], urnBs[9], urnCs[9], urnDs[9]])
 
+
+            player.participant.part2_urns=part2_urns_randomized
 
             #choosing states
             states=[]
@@ -153,7 +158,10 @@ def creating_session(subsession: Subsession):
                         storage.append(1)
                 else:
                     storage.append(0)
-                storage.append(1)
+                if (random.random() <= 0.5):
+                    storage.append(1)
+                else:
+                    storage.append(0)
                 states.append([storage[0],storage[1],storage[2],storage[3]])
 
             player.participant.part2_states = states
