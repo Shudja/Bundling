@@ -55,7 +55,7 @@
 
     <button type="Button" id="Submit" onclick="myFunction()">Submit</button>
 
-    <button id="Next">Next</button>
+    <button id="Next" onclick="Clearing()">Next</button>
 
 <p id="demo"></p>
 
@@ -65,6 +65,27 @@
 
 
 <script>
+
+            window.onload = function(){
+
+        if(localStorage.getItem("first_choice")!==null){
+            var first_choice=JSON.parse(localStorage.getItem("first_choice"))
+
+            if(first_choice==1){
+                document.getElementById('myRadio1').checked = true;
+            }
+            if(first_choice==2){
+                document.getElementById('myRadio2').checked = true;
+            }
+            if(first_choice==3){
+                document.getElementById('myRadio3').checked = true;
+            }
+
+            Assess();
+            myFunction();
+        }
+
+    };
 
         document.getElementById("Next").style.visibility="hidden";
         document.getElementById("Submit").disabled = true;
@@ -87,6 +108,8 @@
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question1Correct2').value=0;
+              localStorage.setItem("first_choice",1)
+
           }
 
           if(document.getElementsByName("colors")[1].checked) {
@@ -97,6 +120,8 @@
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question1Correct2').value=1;
+              localStorage.setItem("first_choice",2)
+
           }
 
           if(document.getElementsByName("colors")[2].checked) {
@@ -107,12 +132,15 @@
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question1Correct2').value=0;
+              localStorage.setItem("first_choice",3)
+
           }
 
         }
 
-        localStorage.clear();
-
+        function Clearing(){
+            localStorage.clear();
+        }
     </script>
 
 

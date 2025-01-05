@@ -1,0 +1,292 @@
+{{ block title }}
+<center> Situation {{round_number}} Results </center>
+{{ endblock }}
+{{ block content }}
+
+</br>
+
+<div class="Image">
+
+</br>
+    <div class="big_box">
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB" >
+
+            <center><u>50%</u></center>
+            <center>{{urnA_H}}/100 <span style="color:green"><b>Green</b></span> </center>
+        </div>
+
+        <div class="containerB">
+            <center><u>50%</u></center>
+            <center>{{urnA_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+        </div>
+
+        </br>
+        </div>
+
+        <div class="box">
+
+        <div class="containerA"  style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>{{urnB_H}}/100 <span style="color:green"><b>Green</b></span> </center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnB_L}}/100 <span style="color:green"><b>Green</b></span> </center>
+        </div>
+            </div>
+
+            </br>
+
+
+
+        </div>
+
+
+        <div  class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{urnC_H}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+
+
+                    <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnC_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+
+            </br>
+
+
+        </div>
+
+        <div  class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>{{urnD_H}}/100 <span style="color:green" ><b>Green</b></span> </center>
+        </div>
+        </div>
+
+        </br>
+
+        </div>
+
+        </div>
+</div>
+
+</br>
+
+
+<div class="Image">
+
+</br>
+    <div class="big_box">
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{safe1}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        </div>
+
+
+        </br>
+        </div>
+
+        <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{safe2}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        </div>
+
+            </br>
+
+
+
+        </div>
+
+
+        <div  class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{safe3}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        </div>
+            </br>
+
+
+        </div>
+
+        <div  class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{safe4}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+        </div>
+        </br>
+
+        </div>
+
+        </div>
+</div>
+
+</br>
+</br>
+
+
+
+<p>
+
+    In this Situation, you received a payoff of {{bandit_payoff}} points.
+
+    In the first decision, you chose {% if first_choice1 == 1 %}
+  Urn A{% endif %} {% if first_choice1 == 2 %} Urn B{% endif %} {% if first_choice1 == 3 %} Urn C{% endif %} {% if first_choice1 == 4 %}
+  Urn D{% endif %} from the first set. You drew a {% if green1TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from this urn.
+    You chose {% if first_choice2 == 5 %}
+  Urn E{% endif %} {% if first_choice2 == 6 %} Urn F{% endif %} {% if first_choice2 == 7 %} Urn G{% endif %} {% if first_choice2 == 8 %}
+  Urn H{% endif %} from the second set. You drew a {% if green1BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from this urn.
+
+        In the second decision, you chose {% if second_choice1 == 1 %}
+  Urn A{% endif %} {% if second_choice1 == 2 %} Urn B{% endif %} {% if second_choice1 == 3 %} Urn C{% endif %} {% if second_choice1 == 4 %}
+  Urn D{% endif %} from the first set. You drew a {% if green2TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green2TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from this urn.
+    You chose {% if second_choice2 == 5 %}
+  Urn E{% endif %} {% if second_choice2 == 6 %} Urn F{% endif %} {% if second_choice2 == 7 %} Urn G{% endif %} {% if second_choice2 == 8 %}
+  Urn H{% endif %} from the second set. You drew a {% if green2BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green2BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from this urn.
+
+
+
+</p>
+
+
+
+
+
+    <input type="hidden" name="second_choice1" id="second_choice1"/>
+    <input type="hidden" name="second_choice2" id="second_choice2"/>
+
+    <button hidden="true" id="Continue">Continue</button>
+
+{{next_button}}
+
+
+{{ endblock }}
+
+{{ block styles }}
+
+<style>
+  .jar {
+    width: 155px;
+    height: 155px;
+    border: 2px solid black;
+    position: relative;
+    display: flex;
+  }
+
+  .ball {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .green {
+    background-color: green;
+  }
+  .purple {
+    background-color: purple;
+  }
+
+  .Image{
+      display:flex;
+  }
+
+  .big_box{
+      /*margin-right:25px;*/
+      border:3px solid black;
+      padding:10px;
+       display:flex;
+  }
+
+  .box{
+      margin-right:25px;
+      border:3px solid blue;
+      padding:5px;
+  }
+
+  .containerA {
+  width:260px;
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center;
+    border: 2px solid black;
+    margin-right:25px;
+  }
+
+  .containerB{
+    /*display: flex; !* Use flexbox *!*/
+    /*flex-direction: column; !* Stack items vertically *!*/
+    /*justify-content: center; !* Center items horizontally *!*/
+    /*align-items: center; !* Center items vertically *!*/
+      width:125px;
+  }
+
+.title {
+    margin-bottom: 20px; /* Add space below the title */
+  }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+<!--  grid-template-columns: auto auto 222px;-->
+<!--  background-color: #2196F3;-->
+  padding: 10px;
+  border: 3px solid black;
+}
+.grid-item {
+<!--  background-color: rgba(255, 255, 255, 0.8);-->
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+
+</style>
+
+
+
+{{ endblock }}

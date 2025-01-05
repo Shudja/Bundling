@@ -126,8 +126,8 @@
   Urn A {% endif %} {% if first_choice == 2 %} Urn B {% endif %} {% if first_choice == 3 %} Urn C {% endif %} {% if first_choice == 4 %}
   Urn D {% endif %} and drew a {% if green1Drawn == 1 %} <span style="color:green"><b>green</b></span> ball. {% endif %}
     {% if green1Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball. {% endif %} Please choose an urn by clicking
-    on the "Choose" button below the relevant urn. After you make your choice, you will be sent to the
-    next page. On this next page, you will observe the ball that you drew from the chosen urn.
+    on the "Choose" button below the relevant urn. Once you have settled on your choice, you can continue to the
+    next page. On the next page, you will observe the ball that you drew from the chosen urn.
 </p>
 
     <input type="hidden" name="second_choice" id="second_choice"/>
@@ -221,10 +221,35 @@ td,th {
     function Draw(value){
         document.getElementById("second_choice").value=value
         document.getElementById("Continue").hidden=false;
-        document.getElementById("b1").disabled=true;
-        document.getElementById("b2").disabled=true;
-        document.getElementById("b3").disabled=true;
-        document.getElementById("b4").disabled=true;
+
+        if(value===1) {
+            document.getElementById("b1").disabled = true;
+            document.getElementById("b2").disabled = false;
+            document.getElementById("b3").disabled = false;
+            document.getElementById("b4").disabled = false;
+
+        }
+
+        if(value===2) {
+            document.getElementById("b2").disabled = true;
+            document.getElementById("b1").disabled = false;
+            document.getElementById("b3").disabled = false;
+            document.getElementById("b4").disabled = false;
+        }
+
+        if(value===3) {
+            document.getElementById("b3").disabled = true;
+            document.getElementById("b1").disabled = false;
+            document.getElementById("b2").disabled = false;
+            document.getElementById("b4").disabled = false;
+        }
+
+        if(value===4) {
+            document.getElementById("b4").disabled = true;
+            document.getElementById("b1").disabled = false;
+            document.getElementById("b2").disabled = false;
+            document.getElementById("b3").disabled = false;
+        }
     }
 
 </script>

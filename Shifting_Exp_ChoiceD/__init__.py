@@ -8,7 +8,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'Shifting_Exp_SafeD'
+    NAME_IN_URL = 'Shifting_Exp_ChoiceD'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 10
 
@@ -48,8 +48,11 @@ class Player(BasePlayer):
     safe3=models.IntegerField()
     safe4=models.IntegerField()
 
-    first_choice=models.IntegerField()
-    second_choice=models.IntegerField()
+    first_choice1=models.IntegerField()
+    first_choice2=models.IntegerField()
+
+    second_choice1=models.IntegerField()
+    second_choice2=models.IntegerField()
 
     green1TDrawn=models.IntegerField()
     green1BDrawn=models.IntegerField()
@@ -58,17 +61,6 @@ class Player(BasePlayer):
     green2BDrawn=models.IntegerField()
 
     bandit_payoff=models.IntegerField()
-
-    Question1Correct1=models.IntegerField(initial=-1000)
-    Question1Correct2=models.IntegerField(initial=-1000)
-
-    Question2Correct1=models.IntegerField(initial=-1000)
-    Question2Correct2=models.IntegerField(initial=-1000)
-
-    Question3Correct1=models.IntegerField(initial=-1000)
-    Question3Correct2=models.IntegerField(initial=-1000)
-
-    Return=models.IntegerField(initial=0)
 
 
 def creating_session(subsession: Subsession):
@@ -83,71 +75,65 @@ def creating_session(subsession: Subsession):
 
             urnAs = [
                 [90, 10],  # Adding uncertainty, compare to Base
-                [90, 30],  # Reducing spread, what happens
-                [70, 10],
-                [100, 40],  # First Stage revealing, compare to Base, compare to prediction
-                [60, 0],
-                [100, 20],  # Base
-                [80, 0],  # Compare to adding uncertainty one
-                [70, 0],
-                [100, 30],
-                [100, 0],
+                [85, 15],  # Reducing spread, what happens
+                [95, 5],
+                [60, 0],  # First Stage revealing, compare to Base, compare to prediction
+                [55, 5],
+                [90, 30],  # Base
+                [95, 25],  # Compare to adding uncertainty one
+                [85, 35],
+                [80, 0],
+                [100, 20],
             ]
 
             urnBs = [
                 [80, 20],  # Adding uncertainty, compare to Base
-                [80, 40],  # Reducing spread, what happens
-                [60, 20],
-                [90, 50],  # First Stage revealing, compare to Base, compare to prediction
-                [50, 10],
-                [90, 30],  # Base
-                [70, 10],  # Compare to adding uncertainty one
-                [60, 10],
-                [90, 40],
-                [75, 25],
+                [70, 30],  # Reducing spread, what happens
+                [85, 15],
+                [50, 10],  # First Stage revealing, compare to Base, compare to prediction
+                [45, 15],
+                [80, 40],  # Base
+                [85, 35],  # Compare to adding uncertainty one
+                [75, 45],
+                [70, 10],
+                [90, 30],
             ]
 
             urnCs = [
-                [70, 30],  # Adding uncertainty, compare to Base
-                [70, 50],  # Reducing spread, what happens
-                [50, 30],
-                [80, 60],  # First Stage revealing, compare to Base, compare to prediction
-                [40, 20],
-                [80, 40],  # Base
-                [60, 20],  # Compare to adding uncertainty one
-                [50, 20],
-                [80, 50],
+                [60, 40],  # Adding uncertainty, compare to Base
+                [75, 25],  # Reducing spread, what happens
                 [65, 35],
+                [40, 20],  # First Stage revealing, compare to Base, compare to prediction
+                [45, 15],
+                [70, 50],  # Base
+                [75, 45],  # Compare to adding uncertainty one
+                [65, 55],
+                [50, 30],
+                [70, 50],
             ]
 
             urnDs = [
-                [60, 40],  # Adding uncertainty, compare to Base
-                [60, 60],  # Reducing spread, what happens
-                [40, 40],
-                [70, 70],  # First Stage revealing, compare to Base, compare to prediction
-                [30, 30],
-                [70, 50],  # Base
-                [50, 30],  # Compare to adding uncertainty one
-                [40, 30],
-                [70, 60],
+                [50, 50],  # Adding uncertainty, compare to Base
+                [50, 50],  # Reducing spread, what happens
                 [50, 50],
+                [30, 30],  # First Stage revealing, compare to Base, compare to prediction
+                [30, 30],
+                [60, 60],  # Base
+                [60, 60],  # Compare to adding uncertainty one
+                [60, 60],
+                [40, 40],
+                [60, 60],
             ]
-            #randomizing urns
-            # seeds=np.array([2,3,4,5,6,7,8,9])
-            # np.random.shuffle(seeds)
 
+
+            #randomizing urns
             seeds=np.array([1,2,3,4,5,6,7,8,9,10])
             np.random.shuffle(seeds)
 
             part2_urns_randomized=[]
 
-            # part2_urns_randomized.append([urnAs[0], urnBs[0], urnCs[0], urnDs[0]])
-
             for i in range(len(seeds)):
                 part2_urns_randomized.append([urnAs[seeds[i]-1], urnBs[seeds[i]-1], urnCs[seeds[i]-1], urnDs[seeds[i]-1]])
-
-            # part2_urns_randomized.append([urnAs[9], urnBs[9], urnCs[9], urnDs[9]])
-
 
             player.participant.part2_urns=part2_urns_randomized
 
@@ -168,10 +154,7 @@ def creating_session(subsession: Subsession):
                         storage.append(1)
                 else:
                     storage.append(0)
-                if (random.random() <= 0.5):
-                    storage.append(1)
-                else:
-                    storage.append(0)
+                storage.append(1)
                 states.append([storage[0],storage[1],storage[2],storage[3]])
 
             player.participant.part2_states = states
@@ -199,67 +182,12 @@ class Instructions1(Page):
         return self.round_number == 1
 
 class Instructions2(Page):
-    form_model = 'player'
-    form_fields = ['Question1Correct1']
-
-
-    def is_displayed(player):
-        return player.round_number == 1
-
-class Instructions2F(Page):
-    form_model = 'player'
-    form_fields = ['Question1Correct2']
-
-
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Question1Correct1 == 0)
-
-    def before_next_page(player, timeout_happened):
-        if (player.Question1Correct1==0)& (player.Question1Correct2==0):
-            player.Return=1
-
+    def is_displayed(self):
+        return self.round_number == 1
 
 class Instructions3(Page):
-    form_model = 'player'
-    form_fields = ['Question2Correct1']
-
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Return==0)
-
-
-class Instructions3F(Page):
-    form_model = 'player'
-    form_fields = ['Question2Correct2']
-
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Question2Correct1 == 0) & (player.Return==0)
-
-    def before_next_page(player, timeout_happened):
-        if (player.Question2Correct1==0)& (player.Question2Correct2==0):
-            player.Return=1
-
-class Instructions4(Page):
-    form_model = 'player'
-    form_fields = ['Question3Correct1']
-
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Return==0)
-
-class Instructions4F(Page):
-    form_model = 'player'
-    form_fields = ['Question3Correct2']
-
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Question3Correct1 == 0) & (player.Return==0)
-
-    def before_next_page(player, timeout_happened):
-        if (player.Question3Correct1==0)& (player.Question3Correct2==0):
-            player.Return=1
-
-class PleaseReturn(Page):
-    def is_displayed(player):
-        return (player.round_number == 1) & (player.Return==1)
-
+    def is_displayed(self):
+        return self.round_number == 1
 
 class Example(Page):
     def is_displayed(self):
@@ -274,11 +202,8 @@ class Starting_Situation(Page):
 
     def before_next_page(player, timeout_happened):
 
-        # safes=[[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51]
-        #        ,[54,53,52,51],[54,53,52,51],[54,53,52,51]]
-
-        safes=[[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54],[54,54,54,54]
-               ,[54,54,54,54],[54,54,54,54],[54,54,54,54]]
+        safes=[[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51],[54,53,52,51]
+               ,[54,53,52,51],[54,53,52,51],[54,53,52,51]]
 
         player.urnA_H = player.participant.part2_urns[player.round_number-1][0][0]
         player.urnB_H = player.participant.part2_urns[player.round_number-1][1][0]
@@ -303,7 +228,7 @@ class Starting_Situation(Page):
 
 class SituationFirst(Page):
     form_model = 'player'
-    form_fields = ['first_choice']
+    form_fields = ['first_choice1','first_choice2']
 
     def vars_for_template(player):
         return dict(
@@ -325,11 +250,11 @@ class SituationFirst(Page):
 
     def before_next_page(player, timeout_happened):
         x=random.random()
-        state=player.participant.part2_states[player.round_number-1][player.first_choice-1]
+        state=player.participant.part2_states[player.round_number-1][player.first_choice1-1]
         if state==1:
-            prob=player.participant.part2_urns[player.round_number-1][player.first_choice-1][0]
+            prob=player.participant.part2_urns[player.round_number-1][player.first_choice1-1][0]
         else:
-            prob=player.participant.part2_urns[player.round_number-1][player.first_choice-1][1]
+            prob=player.participant.part2_urns[player.round_number-1][player.first_choice1-1][1]
         probability=prob*.01
 
         if x<=probability:
@@ -339,13 +264,13 @@ class SituationFirst(Page):
 
         y=random.random()
         probabilityS=0
-        if player.first_choice==1:
+        if player.first_choice2==5:
             probabilityS=player.safe1*.01
-        elif player.first_choice==2:
+        elif player.first_choice2==6:
             probabilityS=player.safe2*.01
-        elif player.first_choice==3:
+        elif player.first_choice2==7:
             probabilityS=player.safe3*.01
-        elif player.first_choice==4:
+        elif player.first_choice2==8:
             probabilityS=player.safe4*.01
 
         if y<=probabilityS:
@@ -355,7 +280,7 @@ class SituationFirst(Page):
 
 class SituationSecond(Page):
     form_model = 'player'
-    form_fields = ['second_choice']
+    form_fields = ['second_choice1', 'second_choice2']
 
     def vars_for_template(player):
         return dict(
@@ -369,7 +294,8 @@ class SituationSecond(Page):
             urnD_L=player.urnD_L,
             round_number=player.round_number,
             green1TDrawn=player.green1TDrawn,
-            first_choice=player.first_choice,
+            first_choice1=player.first_choice1,
+            first_choice2=player.first_choice2,
             safe1=player.safe1,
             safe2=player.safe2,
             safe3=player.safe3,
@@ -379,11 +305,11 @@ class SituationSecond(Page):
 
     def before_next_page(player, timeout_happened):
         x=random.random()
-        state=player.participant.part2_states[player.round_number-1][player.second_choice-1]
+        state=player.participant.part2_states[player.round_number-1][player.second_choice1-1]
         if state==1:
-            prob=player.participant.part2_urns[player.round_number-1][player.second_choice-1][0]
+            prob=player.participant.part2_urns[player.round_number-1][player.second_choice1-1][0]
         else:
-            prob=player.participant.part2_urns[player.round_number-1][player.second_choice-1][1]
+            prob=player.participant.part2_urns[player.round_number-1][player.second_choice1-1][1]
         probability=prob*.01
 
         if x<=probability:
@@ -393,13 +319,13 @@ class SituationSecond(Page):
 
         y=random.random()
         probabilityS=0
-        if player.second_choice==1:
+        if player.second_choice2==5:
             probabilityS=player.safe1*.01
-        elif player.second_choice==2:
+        elif player.second_choice2==6:
             probabilityS=player.safe2*.01
-        elif player.second_choice==3:
+        elif player.second_choice2==7:
             probabilityS=player.safe3*.01
-        elif player.second_choice==4:
+        elif player.second_choice2==8:
             probabilityS=player.safe4*.01
 
         if y<=probabilityS:
@@ -426,10 +352,14 @@ class SituationResults(Page):
             round_number=player.round_number,
             green1TDrawn=player.green1TDrawn,
             green1BDrawn=player.green1BDrawn,
-            first_choice=player.first_choice,
+            first_choice1=player.first_choice1,
+            first_choice2=player.first_choice2,
+
             green2TDrawn=player.green2TDrawn,
             green2BDrawn=player.green2BDrawn,
-            second_choice=player.second_choice,
+            second_choice1=player.second_choice1,
+            second_choice2=player.second_choice2,
+
             bandit_payoff=player.bandit_payoff,
             safe1=player.safe1,
             safe2=player.safe2,
@@ -447,6 +377,5 @@ class Experiment_Results(Page):
     def is_displayed(self):
         return self.round_number == 10
 
-page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F, Instructions3, Instructions3F,
-                 Instructions4, Instructions4F, PleaseReturn, Example, Starting_Situation, SituationFirst,
-                 SituationSecond, SituationResults, Experiment_Results]
+page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions3, Example, Starting_Situation, SituationFirst, SituationSecond,
+                 SituationResults, Experiment_Results]

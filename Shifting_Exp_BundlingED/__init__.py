@@ -81,7 +81,6 @@ def creating_session(subsession: Subsession):
             #payment choice
             player.participant.random_sheet = np.random.choice([i for i in range(1, 11)])
             player.random_round=int(player.participant.random_sheet)
-
             urnAs = [
                 [90, 10],  # Adding uncertainty, compare to Base
                 [90, 30],  # Reducing spread, what happens
@@ -92,7 +91,7 @@ def creating_session(subsession: Subsession):
                 [80, 0],  # Compare to adding uncertainty one
                 [70, 0],
                 [100, 30],
-                [90, 10],
+                [100, 0],
             ]
 
             urnBs = [
@@ -105,7 +104,7 @@ def creating_session(subsession: Subsession):
                 [70, 10],  # Compare to adding uncertainty one
                 [60, 10],
                 [90, 40],
-                [80, 20],
+                [75, 25],
             ]
 
             urnCs = [
@@ -118,7 +117,7 @@ def creating_session(subsession: Subsession):
                 [60, 20],  # Compare to adding uncertainty one
                 [50, 20],
                 [80, 50],
-                [70, 30],
+                [65, 35],
             ]
 
             urnDs = [
@@ -127,26 +126,27 @@ def creating_session(subsession: Subsession):
                 [40, 40],
                 [70, 70],  # First Stage revealing, compare to Base, compare to prediction
                 [30, 30],
-                [70, 30],  # Base
+                [70, 50],  # Base
                 [50, 30],  # Compare to adding uncertainty one
                 [40, 30],
                 [70, 60],
-                [60, 40],
+                [50, 50],
             ]
-
             #randomizing urns
-            seeds=np.array([2,3,4,5,6,7,8,9])
-            np.random.shuffle(seeds)
+            # seeds=np.array([2,3,4,5,6,7,8,9])
+            # np.random.shuffle(seeds)
 
+            seeds=np.array([1,2,3,4,5,6,7,8,9,10])
+            np.random.shuffle(seeds)
 
             part2_urns_randomized=[]
 
-            part2_urns_randomized.append([urnAs[0], urnBs[0], urnCs[0], urnDs[0]])
+            # part2_urns_randomized.append([urnAs[0], urnBs[0], urnCs[0], urnDs[0]])
 
             for i in range(len(seeds)):
                 part2_urns_randomized.append([urnAs[seeds[i]-1], urnBs[seeds[i]-1], urnCs[seeds[i]-1], urnDs[seeds[i]-1]])
 
-            part2_urns_randomized.append([urnAs[9], urnBs[9], urnCs[9], urnDs[9]])
+            # part2_urns_randomized.append([urnAs[9], urnBs[9], urnCs[9], urnDs[9]])
 
 
             player.participant.part2_urns=part2_urns_randomized

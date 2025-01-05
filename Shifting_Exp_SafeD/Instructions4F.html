@@ -5,27 +5,30 @@
 
 
 <p>
-    In each Situation, you will be presented with four options that each have two urns. In each of these Situations,
-    you will make two choices between the four options. Whenever you choose an option, you
+    In each Situation, you will be presented with four options that each have two urns. Each urn in a Situation is a separate urn.
+    <b>In each of these Situations,
+    you will make two choices between the four options.</b> Whenever you choose an option, you
     will draw a ball from each of the two urns in the option. <b>Whenever you draw from an
     urn and the drawn ball is a green ball, you will receive {{ C.BET_PAY }} points.</b>
     Whenever you draw from an urn and the drawn ball is a purple ball, you will receive 0 points.
 </p>
 
 <p>
-    In each Situation, you will first decide which option to implement. You will then be shown the color of the ball
-    drawn from each urn in the option and you will be paid for any green balls that you draw. These balls will then be placed back into
-    their appropriate urns and you will make a second decision between the four options. You will once again decide
-    which of the four options to choose. You will then be shown the color of the ball drawn from each urn and
-    you will be paid for any green balls that you draw. You can choose the same option for both choices, or different
+    In each Situation, you will first decide between the four options. You will then be shown the color of the ball
+    drawn from each urn in the option you chose and you will receive points for any green balls that you draw. These balls will then be placed back into
+    their corresponding urns and you will make a second decision between the four options. You will once again decide
+    which of the four options to choose. You will then be shown the color of the ball drawn from each urn in the option
+    you chose and
+    you will receive points for any green balls that you draw. You can choose the same option for both choices, or different
     options, it is up to you.
 </p>
 
+
 <p>
     As mentioned previously, the urns presented to you in a Situation are new urns that are
-    separate from the urns in the other Situations. These urns do not change
-    within a Situation. That is, these urns were created at the start of the experiment according to their Urn Creation
-    Rule and any ball drawn is placed back inside the appropriate urn before the next decision. Once again, we do not
+    separate from the urns in the other Situations. <b>These urns do not change
+    within a Situation.</b> That is, these urns were created at the start of the experiment according to their Urn Creation
+    Rule and any ball drawn is placed back inside the corresponding urn before the next decision. Once again, we do not
     observe the composition of any of these urns until the end of the experiment.
 </p>
 
@@ -43,23 +46,25 @@
     This is your last and final opportunity to get this question correct.</i>
 </p>
 
-<p><b>How many points is drawing a green ball worth?</b>
+
+<p><b>Please fill in the blanks. Drawing a green ball always results in _____ points. Once created, an urn's composition (i.e., its number of green balls)
+_____ changes.</b>
 </p>
 
     <p>
-        <input type="radio" name="colors" value="1" id="myRadio1" onclick="Assess()"> 100 points</input>
+        <input type="radio" name="colors" value="1" id="myRadio1" onclick="Assess()"> 100 points; never</input>
     </p>
     <p>
-        <input type="radio" name="colors" value="2" id="myRadio2" onclick="Assess()"> 0 points</input>
+        <input type="radio" name="colors" value="2" id="myRadio2" onclick="Assess()"> 0 points; sometimes</input>
     </p>
 
     <p>
-        <input type="radio" name="colors" value="3" id="myRadio3" onclick="Assess()"> 50 points</input>
+        <input type="radio" name="colors" value="3" id="myRadio3" onclick="Assess()"> 50 points; never</input>
     </p>
 
     <button type="Button" id="Submit" onclick="myFunction()">Submit</button>
 
-    <button id="Next">Next</button>
+    <button id="Next" onclick="Clearing()">Next</button>
 
 <p id="demo"></p>
 
@@ -69,6 +74,27 @@
 
 
 <script>
+
+        window.onload = function(){
+
+        if(localStorage.getItem("first_choice")!==null){
+            var first_choice=JSON.parse(localStorage.getItem("first_choice"))
+
+            if(first_choice==1){
+                document.getElementById('myRadio1').checked = true;
+            }
+            if(first_choice==2){
+                document.getElementById('myRadio2').checked = true;
+            }
+            if(first_choice==3){
+                document.getElementById('myRadio3').checked = true;
+            }
+
+            Assess();
+            myFunction();
+        }
+
+    };
 
         document.getElementById("Next").style.visibility="hidden";
         document.getElementById("Submit").disabled = true;
@@ -85,32 +111,36 @@
 
           if(document.getElementsByName("colors")[0].checked) {
               document.getElementById("demo").innerHTML = "This is correct. Each green ball drawn is worth 100 points and " +
-                  "each purple ball drawn is worth 0 points.";
+                  "each purple ball drawn is worth 0 points. An urn's composition never changes once it is created.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question3Correct2').value=1;
+              localStorage.setItem("first_choice",1)
           }
 
           if(document.getElementsByName("colors")[1].checked) {
               document.getElementById("demo").innerHTML = "This is incorrect. Each green ball drawn is worth 100 points and " +
-                  "each purple ball drawn is worth 0 points.";
+                  "each purple ball drawn is worth 0 points. An urn's composition never changes once it is created.";
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question3Correct2').value=0;
+              localStorage.setItem("first_choice",2)
           }
 
           if(document.getElementsByName("colors")[2].checked) {
               document.getElementById("demo").innerHTML = "This is incorrect. Each green ball drawn is worth 100 points and " +
-                  "each purple ball drawn is worth 0 points."
+                  "each purple ball drawn is worth 0 points. An urn's composition never changes once it is created."
               document.getElementById("Submit").disabled = true;
               document.getElementById("Next").style.visibility="visible";
               document.getElementById('Question3Correct2').value=0;
+              localStorage.setItem("first_choice",3)
           }
 
         }
 
-        localStorage.clear();
-
+        function Clearing(){
+            localStorage.clear();
+        }
     </script>
 
 {{ endblock }}

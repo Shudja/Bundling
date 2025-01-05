@@ -12,7 +12,7 @@
 </p>
 
 <p>
-    You will be paid for your participation after completing this experiment.  You will earn at least {{ C.COMPLETION_FEE }} Dollars
+    You will be paid for your participation after completing this experiment.  You will earn {{ C.COMPLETION_FEE }} Dollars
     for completing this experiment and have the possibility of earning more based on your decisions.
 </p>
 
@@ -23,5 +23,9 @@
 </p>
 
     {{ next_button }}
+
+<script>
+    localStorage.clear();
+</script>
 
 {{ endblock }}
