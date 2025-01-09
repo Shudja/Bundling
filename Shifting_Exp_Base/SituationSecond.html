@@ -97,8 +97,8 @@
 </br>
 
 <p>
-    This decision is the second (and last) decision in Situation {{round_number}}. Below is a feedback table summarizing your
-    choice and resulting ball(s) drawn in this Situation so far.
+    This decision is the second (and last) decision in Situation {{round_number}}. Below is the feedback table from the
+    last page that summarizes your choice and resulting ball(s) drawn in this Situation so far.
 </p>
 
 </br>
@@ -125,8 +125,14 @@
     In the first decision, you chose {% if first_choice == 1 %}
   Urn A {% endif %} {% if first_choice == 2 %} Urn B {% endif %} {% if first_choice == 3 %} Urn C {% endif %} {% if first_choice == 4 %}
   Urn D {% endif %} and drew a {% if green1Drawn == 1 %} <span style="color:green"><b>green</b></span> ball. {% endif %}
-    {% if green1Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball. {% endif %} Please choose an urn by clicking
-    on the "Choose" button below the relevant urn. Once you have settled on your choice, you can continue to the
+    {% if green1Drawn == 0 %} <span style="color:purple"><b>purple</b></span> ball. {% endif %}
+</p>
+
+<p>
+    Please choose an urn by clicking
+    on the "Choose" button below the relevant urn. Notice that your choice only becomes finalized when
+    you go to the next page. You are able to change your choice as long as you are on this page.
+    Once you have settled on your choice, you can continue to the
     next page. On the next page, you will observe the ball that you drew from the chosen urn.
 </p>
 

@@ -313,6 +313,22 @@ class SituationFirst(Page):
         else:
             player.green1Drawn=0
 
+class InitialFeedback(Page):
+    def vars_for_template(player):
+        return dict(
+            urnA_H=player.urnA_H,
+            urnB_H=player.urnB_H,
+            urnC_H=player.urnC_H,
+            urnD_H=player.urnD_H,
+            urnA_L=player.urnA_L,
+            urnB_L=player.urnB_L,
+            urnC_L=player.urnC_L,
+            urnD_L=player.urnD_L,
+            round_number=player.round_number,
+            green1Drawn=player.green1Drawn,
+            first_choice=player.first_choice,
+        )
+
 class SituationSecond(Page):
     form_model = 'player'
     form_fields = ['second_choice']
@@ -380,5 +396,6 @@ class Experiment_Results(Page):
 
 page_sequence = [Consent_Form, Instructions1, Instructions2, Instructions2F,
                  Instructions3, Instructions3F,
-                 Instructions4, Instructions4F, PleaseReturn, Example, Starting_Situation,SituationFirst, SituationSecond,
+                 Instructions4, Instructions4F, PleaseReturn, Example, Starting_Situation,SituationFirst,
+                 InitialFeedback, SituationSecond,
                  SituationResults, Experiment_Results]

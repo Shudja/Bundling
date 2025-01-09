@@ -1,0 +1,297 @@
+{{ block title }}
+<center> Situation {{round_number}} First Decision Feedback </center>
+{{ endblock }}
+{{ block content }}
+
+</br>
+
+
+</br>
+
+    {% if first_choice == 1 %}
+
+  <div class="Image">
+
+      <div class="box">
+          <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>50%</u></center>
+          <center> {{urnA_H}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+
+          <div class="containerB">
+          <center><u>50%</u></center>
+          <center>{{urnA_L}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+              </div>
+
+           </br>
+
+                  <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>100%</u></center>
+          <center>{{safe1}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+
+              </div>
+
+
+          </br>
+          </div>
+  </div>
+  {% endif %}
+
+
+{% if first_choice == 2 %}
+  <div class="Image">
+
+      <div class="box">
+
+          <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>50%</u></center>
+          <center>{{urnB_H}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+
+          <div class="containerB">
+          <center><u>50%</u></center>
+          <center>{{urnB_L}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+              </div>
+
+           </br>
+
+                  <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>100%</u></center>
+          <center>{{safe2}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+
+              </div>
+
+
+
+          </br>
+          </div>
+  </div>
+
+{% endif %}
+
+    {% if first_choice == 3 %}
+  <div class="Image">
+    <div class="box">
+
+        <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>50%</u></center>
+        <center>{{urnC_H}}/100 <span style="color:green" ><b>Green</b></span></center>
+        </div>
+
+        <div class="containerB">
+        <center><u>50%</u></center>
+        <center>{{urnC_L}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+            </div>
+         </br>
+
+                <div class="containerA" style="margin-left:auto;margin-right:auto">
+        <div class="containerB">
+
+        <center><u>100%</u></center>
+        <center>{{safe3}}/100 <span style="color:green"><b>Green</b></span></center>
+        </div>
+
+            </div>
+
+        </br>
+        </div>
+  </div>
+
+  {% endif %}
+
+
+    {% if first_choice == 4 %}
+  <div class="Image">
+      <div class="box">
+
+          {% if urnD_H == urnD_L %}
+              <div class="containerA" style="margin-left:auto;margin-right:auto">
+              <div class="containerB">
+
+              <center><u>100%</u></center>
+              <center>{{urnD_H}}/100 <span style="color:green"><b>Green</b></span></center>
+          {% endif %}
+
+           {% if urnD_H != urnD_L %}
+          <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>50%</u></center>
+          <center>{{urnD_H}}/100 <span style="color:green" ><b>Green</b></span></center>
+          </div>
+
+          <div class="containerB">
+          <center><u>50%</u></center>
+          <center>{{urnD_L}}/100 <span style="color:green"><b>Green</b></span></center>
+          {% endif %}
+
+          </div>
+              </div>
+
+           </br>
+
+                  <div class="containerA" style="margin-left:auto;margin-right:auto">
+          <div class="containerB">
+
+          <center><u>100%</u></center>
+          <center>{{safe4}}/100 <span style="color:green"><b>Green</b></span></center>
+          </div>
+
+              </div>
+
+        </br>
+        </div>
+                </div>
+
+        {% endif %}
+
+</div>
+
+</br>
+
+<center>
+    <table>
+      <tr>
+        <th>Decision Number</th>
+          <th>Option Chosen</th>
+        <th>Ball Drawn</th>
+      </tr>
+      <tr>
+        <td>First</td>
+        <td>{% if first_choice == 1 %}
+  Option A{% endif %} {% if first_choice == 2 %} Option B{% endif %} {% if first_choice == 3 %} Option C{% endif %} {% if first_choice == 4 %}
+  Option D{% endif %}</td>
+          <td>{% if green1TDrawn == 1 %} <span style="color:green"><b>Green</b></span> {% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>Purple</b></span> {% endif %} from top urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+            <td>{% if green1BDrawn == 1 %} <span style="color:green"><b>Green</b></span> {% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>Purple</b></span> {% endif %} from bottom urn in {% if first_choice == 1 %}
+  Option A{% endif %}{% if first_choice == 2 %} Option B{% endif %}{% if first_choice == 3 %} Option C{% endif %}{% if first_choice == 4 %}
+  Option D{% endif %}</td>
+
+      </tr>
+    </table>
+</center>
+</br>
+
+
+
+<p>
+    In the first decision, you chose {% if first_choice == 1 %}
+  Option A.{% endif %} {% if first_choice == 2 %} Option B.{% endif %} {% if first_choice == 3 %} Option C.{% endif %} {% if first_choice == 4 %}
+  Option D.{% endif %} You drew a {% if green1TDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1TDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the top urn in that option.
+    You drew a {% if green1BDrawn == 1 %} <span style="color:green"><b>green</b></span> ball {% endif %}
+    {% if green1BDrawn == 0 %} <span style="color:purple"><b>purple</b></span> ball {% endif %} from the bottom urn
+    in that option.
+</p>
+
+{{ next_button }}
+
+{{ endblock }}
+
+{{ block styles }}
+
+<style>
+  .jar {
+    width: 155px;
+    height: 155px;
+    border: 2px solid black;
+    position: relative;
+    display: flex;
+  }
+
+  .ball {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .green {
+    background-color: green;
+  }
+  .purple {
+    background-color: purple;
+  }
+
+  .Image{
+      display:flex;
+    justify-content: center;
+  }
+
+  .box{
+      margin-right:25px;
+      border:3px solid blue;
+      padding:5px;
+  }
+
+  .containerA {
+  width:260px;
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center;
+    border: 2px solid black;
+    margin-right:25px;
+  }
+
+  .containerB{
+    /*display: flex; !* Use flexbox *!*/
+    /*flex-direction: column; !* Stack items vertically *!*/
+    /*justify-content: center; !* Center items horizontally *!*/
+    /*align-items: center; !* Center items vertically *!*/
+      width:125px;
+  }
+
+.title {
+    margin-bottom: 20px; /* Add space below the title */
+  }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+<!--  grid-template-columns: auto auto 222px;-->
+<!--  background-color: #2196F3;-->
+  padding: 10px;
+  border: 3px solid black;
+}
+.grid-item {
+<!--  background-color: rgba(255, 255, 255, 0.8);-->
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+td,th {
+  padding:10px;
+}
+
+</style>
+
+
+
+{{ endblock }}
